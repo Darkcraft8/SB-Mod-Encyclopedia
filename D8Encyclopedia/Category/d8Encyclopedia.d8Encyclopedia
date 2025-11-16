@@ -1,0 +1,344 @@
+{
+    "priority" : 1000001,
+    "name" : "d8Encyclopedia",
+    "title" : "D8:Encyclopedia",
+    "subTitle" : "Lua Powered Documentation",
+    "icon" : "/D8Encyclopedia/Pane/new/icon.png",
+    "zoom" : 0,
+        
+    "unloadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.resetMusic",
+            "args" : [1]
+        }
+    ],
+    "loadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.setMusic",
+            "args" : [["/music/home-concept-loop.ogg"], 1]
+        }
+    ],
+    "background" : {
+        "background_1" : {
+            "parallax" : 0.95,
+            "image" : "/celestial/sector/bg.png",
+            "frame" : 1,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "tiled" : true
+        },
+        "background_2" : {
+            "parallax" : 0.75,
+            "image" : "/interface/cockpit/bgstars.png",
+            "frame" : 1,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "tiled" : true
+        },
+        "galaxy_hologram" : {
+            "parallax" : 0,
+            "image" : "/objects/ancient/hologramgalaxy/hologramgalaxy.png:default.<frameIndex>?scalenearest=2",
+            "frame" : 2,
+            "position" : [0, 11],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "centered" : true
+        },
+        "u2m_line" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [{
+                "type" : "function",
+                "call" : "player.isAdmin",
+                "args" : [],
+                "invert" : false
+            }],
+
+            "startPos" : [0, 0],
+            "endPos" : [90, 0],
+            "color" : [255, 255, 255, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+
+        "txtTutorial1" : {
+            "type" : "text",
+            "zLevel" : 2,
+            "requires" : [],
+
+            "string" : "^shadow;Click Here For Basic Usage ->",
+            "horizontalTextAnchor" : "mid",
+            "verticalTextAnchor" : "mid",
+            "color" : [200, 200, 200, 255],
+            "scale" : 1,
+
+            "parallax" : 0,
+            "position" : [-60, 0],
+            "positionLocked" : false,
+            "anchor" : "center"
+            
+        },
+
+        "txtTutorial2" : {
+            "type" : "text",
+            "zLevel" : 2,
+            "requires" : [],
+
+            "string" : "^shadow;< Click And Drag The Screen To Move The Camera >",
+            "horizontalTextAnchor" : "mid",
+            "verticalTextAnchor" : "mid",
+            "color" : [200, 200, 200, 255],
+            "scale" : 1,
+
+            "parallax" : 0,
+            "position" : [0, 100],
+            "positionLocked" : false,
+            "anchor" : "center"
+            
+        },
+
+        "txtTutorial3" : {
+            "type" : "text",
+            "zLevel" : 2,
+            "requires" : [{
+                "type" : "function",
+                "call" : "player.isAdmin",
+                "args" : [],
+                "invert" : false
+            }],
+
+            "string" : "^shadow;<- Click Here For Basic Modder Usage",
+            "horizontalTextAnchor" : "mid",
+            "verticalTextAnchor" : "mid",
+            "color" : [200, 200, 200, 255],
+            "scale" : 1,
+
+            "parallax" : 0,
+            "position" : [165, 0],
+            "positionLocked" : false,
+            "anchor" : "center"
+            
+        },
+
+        "txtTutorial4" : {
+            "type" : "text",
+            "zLevel" : 2,
+            "requires" : [],
+
+            "string" : "^shadow;<- Hover To Show Categories",
+            "horizontalTextAnchor" : "left",
+            "verticalTextAnchor" : "top",
+            "color" : [200, 200, 200, 255],
+            "scale" : 1,
+
+            "parallax" : 0,
+            "position" : [2, -10],
+            "positionLocked" : true,
+            "anchor" : "topLeft"  
+        },
+
+        "txtImportant" : {
+            "type" : "text",
+            "zLevel" : 2,
+            "requires" : [],
+
+            "string" : "^shadow;This Release Is Still Experimental!\nFeel free to open issues on it github page or it workshop page.",
+            "horizontalTextAnchor" : "mid",
+            "verticalTextAnchor" : "top",
+            "color" : [200, 200, 200, 255],
+            "scale" : 1,
+
+            "parallax" : 0,
+            "position" : [0, -10],
+            "positionLocked" : true,
+            "anchor" : "centerTop"  
+        }
+    },
+    "btn" : {
+        "questTest" : {
+            "priority" : 100,
+            "parallax" : 0,
+            "image" : {
+                "base" : "/interface/cockpit/cockpit.png",
+                "hover" : "/interface/cockpit/cockpit.png?brightness=25?saturation=-25",
+                "pressed" : "/interface/cockpit/cockpit.png?brightness=-25?saturation=25",
+                "disabled" : "/interface/cockpit/cockpit.png?brightness=-50?saturation=-50"
+            },
+            "frame" : 1,
+            "position" : [0, 12],
+            "positionLocked" : true,
+            "anchor" : "centerBottom",
+            "centered" : true,
+
+            "callback" : "buttonEvent",
+            "name" : "questTest",
+            
+            "requires" : [{
+                "type" : "function",
+                "call" : "player.canStartQuest",
+                "args" : ["wateringcan"],
+                "invert" : false
+            },{
+                "type" : "function",
+                "call" : "player.isAdmin",
+                "args" : [],
+                "invert" : false
+            }],
+            "disabled" : false,
+            "hideWhenDisabled" : true,
+
+            "clickEventType" : "quest",
+            "args" : ["wateringcan"],
+
+            "tooltipCfg" : "Quest Test\n^shadow,cyan;[Left Click To Get The Watering Can Quest]^reset;"
+        },
+        "basicUsagePlayer" : {
+            "parallax" : 0,
+            "image" : {
+                "base" : "/D8Encyclopedia/Pane/new/questionBtn.png",
+                "hover" : "/D8Encyclopedia/Pane/new/questionBtn.png?brightness=25?saturation=-25",
+                "pressed" : "/D8Encyclopedia/Pane/new/questionBtn.png?brightness=-25?saturation=-25"
+            },
+            "frame" : 1,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "centered" : true,
+
+            "callback" : "buttonEvent",
+            "name" : "basicUsagePlayer",
+            
+            "requires" : [],
+
+            "clickEventType" : "function",
+            "args" : ["basicUsageInfo"],
+
+            "tooltipCfg" : "Basics Usage : Player\nHow To Use The Encyclopedia ^shadow,cyan;[Left Click To Open]^reset;"
+        },
+        "basicUsageModder" : {
+            "parallax" : 0,
+            "image" : {
+                "base" : "/D8Encyclopedia/Pane/new/questionBtn.png",
+                "hover" : "/D8Encyclopedia/Pane/new/questionBtn.png?brightness=25?saturation=-25",
+                "pressed" : "/D8Encyclopedia/Pane/new/questionBtn.png?brightness=-25?saturation=-25"
+            },
+            "frame" : 1,
+            "position" : [90, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "centered" : true,
+
+            "callback" : "buttonEvent",
+            "name" : "basicUsageModder",
+            
+            "requires" : [{
+                "type" : "function",
+                "call" : "player.isAdmin",
+                "args" : [],
+                "invert" : false
+            }],
+            "hideWhenDisabled" : true,
+
+            "clickEventType" : "prefab",
+            "args" : [
+                "popup",
+                {
+                    "gui" : {
+                     "labelTitle" : {
+                      "value" : "Basics Usage : Modder"
+                     },
+                     "labelLayout" : {
+                      "children" : {
+                       "labelScrollArea"  : {
+                        "children": {
+                         "labelText" : {
+                          "value" : "- The \"background\" parameter contain image/sprite to be rendered in the background,\nthey can be tiled or not and have a few parameter that designate the way they appear\n- The \"btn\" contain all the canvas button \n- The categories list file is designated by the \"categoryList\""
+                     } } } } }
+                    }
+                }
+            ],
+
+            "tooltipCfg" : "Basics Usage : Modder\nHow To Use The Encyclopedia ^shadow,cyan;[Left Click To Open]^reset;"
+        },
+
+        "updateLog" : {
+            "priority" : 100,
+            "parallax" : 0,
+            "image" : {
+                "base" : "/interface/popup/warning.png?crop;0;1;22;23",
+                "hover" : "/interface/popup/warning.png?crop;0;1;22;23?brightness=25?saturation=-25",
+                "pressed" : "/interface/popup/warning.png?crop;0;1;22;23?brightness=-25?saturation=-25",
+                "disabled" : "/interface/popup/warning.png?crop;0;1;22;23?brightness=-50?saturation=-50"
+            },
+            "frame" : 1,
+            "position" : [1, 0],
+            "positionLocked" : true,
+            "anchor" : "bottomLeft",
+            "centered" : false,
+
+            "callback" : "buttonEvent",
+            "name" : "updateLog",
+                    
+            "requires" : [],
+            "hideWhenDisabled" : false,
+
+            "clickEventType" : "prefab",
+            "args" : [
+                "popup",
+                {
+                    "gui" : {
+                     "labelTitle" : {
+                      "value" : "Update Log"
+                     },
+                     "labelLayout" : {
+                      "children" : {
+                       "labelScrollArea"  : {
+                        "children": {
+                         "labelText" : {
+                          "value" : "| V1.0.4.5 - Re-Written : Initial Release of the rewritten interface"
+                     } } } } }
+                    }
+                }
+            ],
+
+            "tooltipCfg" : "Update Log, Current Version : V1.0.4.5 - Re-Written"
+        },
+        
+        "openLegacy" : {
+            "priority" : 100,
+            "parallax" : 0,
+            "image" : {
+                "base" : "/D8Encyclopedia/Pane/old/icon.png",
+                "hover" : "/D8Encyclopedia/Pane/old/icon.png?brightness=25?saturation=-25",
+                "pressed" : "/D8Encyclopedia/Pane/old/icon.png?brightness=-25?saturation=25"
+            },
+            "frame" : 1,
+            "position" : [3, 23],
+            "positionLocked" : true,
+            "anchor" : "bottomLeft",
+            "centered" : false,
+
+            "callback" : "buttonEvent",
+            "name" : "openLegacy",
+
+            "clickEventType" : "scriptpane",
+            "args" : ["/D8Encyclopedia/Pane/old/open.config", true],
+
+            "tooltipCfg" : "^shadow,cyan;[Click to open legacy scriptpane]^reset;"
+        }
+    }
+}

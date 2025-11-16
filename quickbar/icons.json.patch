@@ -1,0 +1,15 @@
+[
+  {
+    "op": "add",
+    "path": "/items/d8EncyclopediaNew",
+    "value": {
+      "label": "D8: Encyclopedia | Re-Written",
+      "icon": "/D8Encyclopedia/Pane/old/icon.png",
+      "weight": 0,
+      "action": [
+        "pane",
+        "/D8Encyclopedia/Pane/new/pane.config"
+      ]
+    }
+  }
+]

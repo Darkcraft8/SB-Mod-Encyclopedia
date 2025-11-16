@@ -1,0 +1,17 @@
+{
+    "priority" : 0,
+    "name" : "survival",
+    "title" : "^shadow;Survival^reset;",
+    "subTitle" : "^shadow;Trying to not die challenge^reset;",
+    "icon" : "/interface/crafting/tabicon_survival.png",
+
+    "requires" : [],
+
+    "unloadEvent" : [
+    ],
+    "loadEvent" : [
+    ],
+
+    "background" : {},
+    "btn" : {}
+}

@@ -1,0 +1,26 @@
+[
+    [
+        { 
+            "op" : "add",
+            "path" : "/escapeBtn/d8Encyclopedia",
+            "value" : {
+                "priority" : 900,
+                "gui" : {
+                    "icon" : {
+                        "offset" : [-33, 0],
+                        "image" : "/D8Encyclopedia/Pane/old/icon.png"
+                    },
+                    "buttonName" : {
+                        "offset" : [8, 0],
+                        "visible" : true,
+                        "text" : "^blue;D8:Encyclopedia^reset;"
+                    }
+                },
+                "tooltipText" : "--[ Lua Script Powered In-Game Documentation ]--",
+                "callback" : "doInteraction",
+                "scripts" : ["/d8Arlmenarum/interfaces/escapeDialog/button/doInteraction.lua"],
+                "args" : ["scriptPane", "/D8Encyclopedia/Pane/new/pane.config"]
+            }
+        }
+    ]
+]

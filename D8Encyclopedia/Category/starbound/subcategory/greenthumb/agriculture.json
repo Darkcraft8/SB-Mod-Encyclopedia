@@ -1,0 +1,17 @@
+{
+    "priority" : 3,
+    "name" : "agriculture",
+    "title" : "^shadow;Agriculture^reset;",
+    "subTitle" : "^shadow;Saw the seeds^reset;",
+    "icon" : "/interface/crafting/tabicon_farming.png",
+
+    "requires" : [],
+
+    "unloadEvent" : [
+    ],
+    "loadEvent" : [
+    ],
+
+    "background" : {},
+    "btn" : {}
+}

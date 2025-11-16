@@ -1,0 +1,48 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/upgradeablecraftingobjects/craftingfurniture/craftingfurnitureicon.png",
+        "hover" : "/objects/crafting/upgradeablecraftingobjects/craftingfurniture/craftingfurnitureicon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/upgradeablecraftingobjects/craftingfurniture/craftingfurnitureicon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Wooden Workbench^reset;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstableicon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftingfurniture/craftingfurniture.png:default.default"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Crafted Through: ^orange;Inventor's Table^reset;"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "The Wooden Workbench is used to craft furnitures to acomodate your living spaces."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : "/recipes/inventorstable1/craftingfurniture.recipe"
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Wooden Workbench^reset;"
+}

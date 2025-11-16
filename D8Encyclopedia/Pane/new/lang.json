@@ -1,0 +1,10 @@
+{
+    "_lang" : "A file that store most string displayed used in the script itself for compatible translations.",
+    "camRelativePos" : "cursor position relative to center : ",
+    "zoom" : "Zoom : ",
+    "nextZoom" : "nextZoom : ",
+
+    "btnInBound" : "btn inBound : ",
+    "btnOutOfBound" : "btn outOfBound : ",
+    "btnDisabled" : "btn disabled : "
+}

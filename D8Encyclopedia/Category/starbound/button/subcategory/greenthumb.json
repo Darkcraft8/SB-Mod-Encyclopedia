@@ -1,0 +1,23 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/D8Encyclopedia/Category/button/subcategory/pluscross.png",
+        "hover" : "/D8Encyclopedia/Category/button/subcategory/pluscross.png?brightness=25?saturation=-25",
+        "pressed" : "/D8Encyclopedia/Category/button/subcategory/pluscross.png?brightness=-25?saturation=-25"
+    },
+    "zLevel" : 10,
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "loadCategory",
+            "args" : ["/D8Encyclopedia/Category/starbound/greenthumblist.json"]
+        }
+    ],
+    "tooltipCfg" : "^orange;Sub-Category List : Green Thumb^reset;"
+}

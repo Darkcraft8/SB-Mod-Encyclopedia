@@ -1,0 +1,41 @@
+[
+    [
+        {
+			"op": "copy",
+			"from": "/gui/close",
+			"path": "/gui/d8EncyclopediaBtn"
+		},
+        {
+			"op": "replace",
+			"path": "/gui/d8EncyclopediaBtn/base",
+			"value" : "/D8Encyclopedia/Pane/icon.png"
+		},
+        {
+			"op": "replace",
+			"path": "/gui/d8EncyclopediaBtn/hover",
+			"value" : "/D8Encyclopedia/Pane/icon.png?brightness=25?hueshift=25"
+		},
+        {
+			"op": "replace",
+			"path": "/gui/d8EncyclopediaBtn/pressed",
+			"value" : "/D8Encyclopedia/Pane/icon.png?brightness=-25?hueshift=-25"
+		},
+        {
+			"op": "replace",
+			"path": "/gui/d8EncyclopediaBtn/position/0",
+			"value" : 225
+        }
+    ],
+    [
+        {
+			"op": "add",
+			"path": "/scripts/-",
+			"value" : "/interface/scripted/collections/open_d8Encyclopedia.lua"
+		},
+        {
+			"op": "add",
+			"path": "/scriptWidgetCallbacks/-",
+			"value" : "d8EncyclopediaBtn"
+		}
+    ]
+]

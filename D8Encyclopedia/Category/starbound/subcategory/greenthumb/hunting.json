@@ -1,0 +1,17 @@
+{
+    "priority" : 1,
+    "name" : "hunting",
+    "title" : "^shadow;Hunting^reset;",
+    "subTitle" : "^shadow;Hunting Nom Materials^reset;",
+    "icon" : "/interface/crafting/tabicon_hunting.png",
+
+    "requires" : [],
+
+    "unloadEvent" : [
+    ],
+    "loadEvent" : [
+    ],
+
+    "background" : {},
+    "btn" : {}
+}

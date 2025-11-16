@@ -1,0 +1,21 @@
+{
+    "priority" : -10000,
+    "name" : "returnToEncyclopedia",
+    "title" : "^shadow;Encyclopedia^reset;",
+    "subTitle" : "^shadow;Click To Return To The Encyclopedia^reset;",
+    "icon" : "/D8Encyclopedia/Pane/new/icon.png",
+
+    "requires" : [],
+
+    "unloadEvent" : [
+    ],
+    "loadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.scriptpane",
+            "args" : ["/D8Encyclopedia/Pane/new/pane.config", true]
+        }
+    ],
+    "background" : {},
+    "btn" : {}
+}

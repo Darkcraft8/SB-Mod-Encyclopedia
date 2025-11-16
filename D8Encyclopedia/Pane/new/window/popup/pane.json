@@ -1,0 +1,65 @@
+{
+    "gui" : {
+        "background" : {
+            "zlevel" : -10,
+            "type" : "background",
+            "fileHeader" : "/D8Encyclopedia/Pane/new/window/popup/header.png",
+            "fileBody" : "/D8Encyclopedia/Pane/new/window/popup/body.png",
+            "fileFooter" : "/D8Encyclopedia/Pane/new/window/popup/footer.png"
+        },
+        "icon" : {
+            "type" : "image",
+            "file" : "/D8Encyclopedia/Pane/new/icon.png",
+            "position" : [2, 176],
+            "zlevel" : -1
+        },
+        "btnOk" : {
+            "type" : "button",
+            "base" : "/interface/popup/acceptUp.png",
+            "hover" : "/interface/popup/acceptOver.png",
+            "position" : [110, 10],
+            "caption" : "Okay",
+            "callback" : "close"
+        },
+        "labelTitle" : {
+            "type" : "label",
+            "position" : [26, 186],
+            "hAnchor" : "left",
+            "vAnchor" : "mid",
+            "wrapWidth" : 200,
+            "lineSpacing" : 1.0,
+            "value" : "REPLACE ME",
+            "color" : [255,255,255]
+        },
+        "labelLayout" : {
+            "type" : "layout",
+            "layoutType" : "basic",
+            "rect" : [2, 27, 265, 173],
+            "position" : [0, 0],
+            "children" : {
+                "labelScrollArea"  : {
+                    "type": "scrollArea",
+                    "zlevel" : 1,
+                    "position" : [2, 0],
+                    "size" : [262, 145], 
+                    "children": {
+                        "labelText" : {
+                            "type" : "label",
+                            "position" : [0, 0],
+                            "hAnchor" : "left",
+                            "vAnchor" : "bottom",
+                            "wrapWidth" : 253,
+                            "lineSpacing" : 1.0,
+                            "value" : "REPLACE ME",
+                            "color" : [255,255,255]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "scripts" : ["/D8Encyclopedia/Pane/new/window/base.lua"],
+    "scriptWidgetCallbacks" : [
+        "close"
+    ]
+}

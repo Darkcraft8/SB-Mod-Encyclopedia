@@ -1,0 +1,14 @@
+{
+  "name" : "d8Encylopedia_starbound_progression",
+  "title" : "^orange;Starbound ^white;progression^#fff0,set;",
+  "type" : "generic",
+
+  "collectables" : {
+    "inventorstableT1" : {
+      "order" : 1,
+      "title" : "^#fff0; collection^orange;From The Ashes",
+      "description" : "The inventor's table will be of vital necessity for your journey.",
+      "icon" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstable.png"
+    }
+  }
+}

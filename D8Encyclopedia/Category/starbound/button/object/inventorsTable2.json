@@ -1,0 +1,52 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstable2icon.png",
+        "hover" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstable2icon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstable2icon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Engineer's Table^reset;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstableicon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstable2.png:default.default"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Upgrading: ^orange;Inventor's Station^reset;"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "The Inventor's Station serve has a progression hub throughout your playthrough.\n\nSome of the most important object(s) will be found here."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : { "input" : [
+                        { "item" : "tungstenbar", "count" : 6 },
+                        { "item" : "glass", "count" : 10 },
+                        { "item" : "silverbar", "count" : 5 }
+                    ]}
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Engineer's Table^reset;"
+}

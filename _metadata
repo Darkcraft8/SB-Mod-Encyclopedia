@@ -1,0 +1,14 @@
+{
+  "author" : "Darkcraft8",
+  "description" : "A framework made to allow mod to easily add centralised information.\n\nthe pane can be opened either through :\n  the collection pane\n  quickbar\n\nMod that currently have compact : \nD8 Weaponry",
+  "friendlyName" : "D8 Encyclopedia | Re-Written",
+  "link" : "steam://url/CommunityFilePage/3410583838",
+  "name" : "d8_encyclopedia",
+  "priority" : 1000,
+  "includes" : ["d8Arlmenarum_UI"],
+  "require" : ["d8_sharedFiles"],
+  "steamContentId" : "3410583838",
+  "tags" : "Miscellaneous|In-Game Tools",
+  "version" : "V1.0.4.5 - Re-Written",
+  "scripts": {"postLoad": ["/D8Encyclopedia/Mod/categoryFetcher.lua"]}
+}

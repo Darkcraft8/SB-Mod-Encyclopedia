@@ -1,0 +1,22 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/D8Encyclopedia/Pane/new/questionBtn.png",
+        "hover" : "/D8Encyclopedia/Pane/new/questionBtn.png?brightness=25?saturation=-25",
+        "pressed" : "/D8Encyclopedia/Pane/new/questionBtn.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "pane.playSound",
+            "args" : ["/sfx/cinematics/protectorate/wakeup_alarm2.ogg", 0, 1]
+        }
+    ],
+    "tooltipCfg" : null
+}

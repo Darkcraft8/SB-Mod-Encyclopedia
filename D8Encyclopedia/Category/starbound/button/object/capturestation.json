@@ -1,0 +1,48 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/capturestation/capturestationicon.png",
+        "hover" : "/objects/crafting/capturestation/capturestationicon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/capturestation/capturestationicon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Capture Station^reset;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstable3icon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/capturestation/capturestation.png:default.default"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Crafted Through: ^orange;Architect's Table^reset;"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "The Capture Station allow to create item and object to capture and take care of creature you may find on your journey."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : "/recipes/inventorstable2/capturestation.recipe"
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Capture Station^reset;"
+}

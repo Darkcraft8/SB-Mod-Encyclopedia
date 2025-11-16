@@ -1,0 +1,5 @@
+{
+    "baseClickEvent" : "/D8Encyclopedia/Pane/new/clickEvent/base.lua",
+    "baseRequirement" : "/D8Encyclopedia/Pane/new/requirement/base.lua",
+    "baseRenderType" : "/D8Encyclopedia/Pane/new/renderType.lua"
+}

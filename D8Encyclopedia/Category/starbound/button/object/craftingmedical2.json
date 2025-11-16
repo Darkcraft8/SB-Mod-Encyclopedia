@@ -1,0 +1,53 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedical2icon.png",
+        "hover" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedical2icon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedical2icon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Apothecary^white;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedicalicon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedical2.png:default.default"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Upgrade: ^orange;Apothecary^reset;"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : ""
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : { "input" : [
+                        { "item" : "durasteelbar", "count" : 6 },
+                        { "item" : "siliconboard", "count" : 3 },
+                        { "item" : "wire", "count" : 5 },
+                        { "item" : "battery", "count" : 1 }
+                    ]}
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Apothecary^white;"
+}

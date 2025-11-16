@@ -1,0 +1,48 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarmicon.png",
+        "hover" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarmicon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarmicon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Foraging Table^reset;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstableicon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarm.png"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Crafted Through: ^orange;Inventor's Table^reset;"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "The Foraging Table is used to craft item and object aimed at the care of crops and livestock."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : "/recipes/inventorstable1/craftingfarm.recipe"
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Foraging Table^reset;"
+}

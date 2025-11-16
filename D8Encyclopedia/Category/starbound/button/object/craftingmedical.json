@@ -1,0 +1,48 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedicalicon.png",
+        "hover" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedicalicon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedicalicon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Apothecary^white;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstable2icon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftingmedical/craftingmedical.png:default.default"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Crafted Through: ^orange;Engineer's Table^reset;"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "The Apothecary grant access to medicinal items."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : "/recipes/inventorstable1/craftingmedical.recipe"
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Apothecary^white;"
+}

@@ -1,0 +1,48 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/upgradeablecraftingobjects/craftinganvil/craftinganvilicon.png",
+        "hover" : "/objects/crafting/upgradeablecraftingobjects/craftinganvil/craftinganvilicon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/upgradeablecraftingobjects/craftinganvil/craftinganvilicon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Capture Station^reset;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/inventorstable/inventorstableicon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftinganvil/craftinganvil.png:default"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Crafted Through: ^orange;Inventor's Table^reset;"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "The Anvil is used to craft armors and weapons.\n\nIt also can be used to craft some single-use items."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : "/recipes/inventorstable1/craftinganvil.recipe"
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Anvil^reset;"
+}

@@ -1,0 +1,48 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/campfire/campfireicon.png",
+        "hover" : "/objects/crafting/campfire/campfireicon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/campfire/campfireicon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Campfire^reset;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/items/active/weapons/fist/fisticon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/campfire/campfire.png:default.default"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Crafted Through: Plain Crafting"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "The Campfire allow you to cook basic meal."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : "/recipes/inventorstable2/campfire.recipe"
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Campfire^reset;"
+}

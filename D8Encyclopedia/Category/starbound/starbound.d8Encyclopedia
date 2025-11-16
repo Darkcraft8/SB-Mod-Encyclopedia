@@ -1,0 +1,846 @@
+{
+    "priority" : 1000000,
+    "name" : "starbound",
+    "title" : "Starbound",
+    "subTitle" : "Mechanics Reminder",
+    "icon" : "/interface/cockpit/cockpit.png",
+
+    "unloadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.resetMusic",
+            "args" : [1]
+        }
+    ],
+    "loadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.setMusic",
+            "args" : [["/music/title-theme-concept-old.ogg"], 1]
+        }
+    ],
+    "background" : {
+        "background_1" : {
+            "parallax" : 0.95,
+            "image" : "/interface/cockpit/nebula1.png",
+            "frame" : 1,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "tiled" : true
+        },
+        "background_2" : {
+            "parallax" : 0.75,
+            "image" : "/interface/cockpit/bgstars.png",
+            "frame" : 1,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "tiled" : true
+        },
+        "bg_whitestar" : {
+            "parallax" : 0,
+            "image" : "/celestial/system/whitestar.png",
+            "frame" : 1,
+            "scale" : 0.07,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "centered" : true
+        },
+        "textInfo1" : {
+            "type" : "text",
+            "zLevel" : 2,
+            "requires" : [],
+
+            "string" : "This Is Where Information About The Main Game Would Be Located...\nSuggestion Are Welcome.",
+            "horizontalTextAnchor" : "left",
+            "verticalTextAnchor" : "mid",
+            "color" : [255, 150, 50, 255],
+            "scale" : 1,
+
+            "parallax" : 0,
+            "position" : [2, -13],
+            "positionLocked" : false,
+            "anchor" : "topLeft"
+            
+        },
+
+        "line_center2plResources" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [],
+
+            "startPos" : [0, 0],
+            "endPos" : [-100, 0],
+            "color" : [255, 255, 255, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+
+        "line_center2inventTable" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [],
+
+            "startPos" : [0, 0],
+            "endPos" : [0, 36],
+            "color" : [255, 255, 255, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+        "line_inventTable_craftingfarm" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingfarm"],
+                    "invert" : false
+                }
+            ],
+
+            "startPos" : [0, 36],
+            "endPos" : [-36, 36],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [0, 0, 0, 150]
+                }
+            }
+        },
+        "line_inventTable_craftingwheel" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingwheel"],
+                    "invert" : false
+                }
+            ],
+
+            "startPos" : [0, 36],
+            "endPos" : [-66, 36],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+        "line_inventTable_craftingfurniture" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingfurniture"],
+                    "invert" : false
+                }
+            ],
+
+            "startPos" : [0, 36],
+            "endPos" : [-96, 36],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+        
+        "line_inventTable_craftingfurnace" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingfurnace"],
+                    "invert" : false
+                }
+            ],
+
+            "startPos" : [0, 36],
+            "endPos" : [36, 36],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [0, 0, 0, 150]
+                }
+            }
+        },
+        
+        "line_inventTable_craftinganvil" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftinganvil"],
+                    "invert" : false
+                }
+            ],
+
+            "startPos" : [0, 36],
+            "endPos" : [66, 36],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+
+        "line_inventTable_2" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [],
+
+            "startPos" : [0, 36],
+            "endPos" : [0, 66],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+        "line_inventTable2_FossilStation" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["fossilstation"],
+                    "invert" : false
+                }
+            ],
+
+            "startPos" : [0, 66],
+            "endPos" : [-36, 66],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+        "line_inventTable2_Refinery" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["refinery"],
+                    "invert" : false
+                }
+            ],
+
+            "startPos" : [0, 66],
+            "endPos" : [-66, 66],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+        "line_inventTable2_craftingmedical" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingmedical"],
+                    "invert" : false
+                }
+            ],
+
+            "startPos" : [0, 66],
+            "endPos" : [-96, 66],
+            "color" : [0, 0, 0, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        },
+
+        "line_inventTable2_3" : {
+            "type" : "line",
+            "zLevel" : 1,
+            "requires" : [],
+
+            "startPos" : [0, 66],
+            "endPos" : [0, 96],
+            "color" : [255, 255, 255, 255],
+            "lineWidth" : 3,
+
+            "parallax" : 0,
+            "positionLocked" : false,
+            "anchor" : "center",
+            "encyclopedia" : {
+                "wave" : {
+                    "startStrenght" : 1,
+                    "endStrenght" : 1,
+                    "endColor" : [255, 255, 255, 150]
+                }
+            }
+        }
+    },
+    "btn" : {
+        "starbound" : {
+            "parallax" : 0,
+            "image" : {
+                "base" : "/interface/cockpit/cockpit.png",
+                "hover" : "/interface/cockpit/cockpit.png?brightness=25?saturation=-25",
+                "pressed" : "/interface/cockpit/cockpit.png?brightness=-25?saturation=25"
+            },
+            "frame" : 1,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "centered" : true,
+
+            "require" : [{
+                "invert" : false,
+                "type" : "function",
+                "args" : []
+            }],
+            "callback" : "buttonEvent",
+            "name" : "starbound",
+
+            
+            "clickEvent" : [
+                {
+                    "call" : "pane.playSound",
+                    "args" : ["/sfx/cinematics/protectorate/wakeup_alarm2.ogg", 0, 1]
+                },
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "popup",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "^yellow;§^reset; Welcome To Starbound ^yellow;§^reset;"
+                                },
+                                "labelLayout" : {
+                                    "children" : {
+                                        "labelScrollArea"  : {
+                                            "children": {
+                                                "labelText" : {
+                                                    "value" : "Hello and welcome!\nStarbound is a sandbox game with light rpg and survival elements where you will be exploring a mulitude of planets for materials and loot."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Welcome To Starbound"
+        },
+
+        "resources" : {
+            "parallax" : 0,
+            "image" : {
+                "base" : "/interface/cockpit/cockpit.png",
+                "hover" : "/interface/cockpit/cockpit.png?brightness=25?saturation=-25",
+                "pressed" : "/interface/cockpit/cockpit.png?brightness=-25?saturation=25"
+            },
+            "frame" : 1,
+            "position" : [-100, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "centered" : true,
+
+            "require" : [{
+                "invert" : false,
+                "type" : "function",
+                "args" : []
+            }],
+            "callback" : "buttonEvent",
+            "name" : "starbound_resources",
+
+            "clickEventType" : "prefab",
+            "args" : [
+                "popup",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "THE DIFFERENT PLAYER RESOURCES"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "labelScrollArea"  : {
+                                    "children": {
+                                        "labelText" : {
+                                            "value" : "The Player Character has 10 resources kind in vanilla, here some of the most important one.\n\n^red;Health^reset; :\nHas you can guess when it get to 0 or under you character will die and be teleported either on your ship or at a respawn point in the world if it has one.\n\n^green;Energy^reset; :\nIt used for some weapon ability and for your movement tech,\nwhen depleted it wont start regenerating for a moment,\nit take around 1.75 second to fillup from zero.\n\n^orange;Food^reset; :\nIt the amount of satiety that you character has,\nwhen it reach 0.15% or under the player will be affected with the 'hungry' debuff unless it at 0% where the hungry debuff will be replaced with the 'starving' debuff,\nit disabled in casual mode.\n\n^cyan;Breath^reset; :\nIt the amount of oxygen you have,\nwhen your head is stuck in solid terrain, in liquid or inside a airless environement, it will start to deplete and will regenerate when in open air.\nwhen it reach zero you start taking damage."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+
+            "tooltipCfg" : "The Different Player Resources\n ^shadow,cyan;[Left Click For More Information]^reset;"
+        },
+
+        "inventorsTable" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/inventorsTable.json",
+            "name" : "inventorsTable",
+            "position" : [0, 36],
+
+            "requires" : [],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Increasing Your Odds : ^orange;Inventor's Station^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Increasing Your Odds"
+        },
+        "craftinganvil" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/craftinganvil.json",
+            "name" : "craftinganvil",
+            "position" : [66, 36],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftinganvil"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Honing Metal : ^orange;Anvil^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Honing Metal"
+        },
+        "craftingfarm" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/craftingfarm.json",
+            "name" : "craftingfarm",
+            "position" : [-36, 36],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingfarm"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Green Thumb : ^orange;Foraging Table^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Green Thumb"
+        },
+        "craftingfarmplus" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/subcategory/greenthumb.json",
+            "name" : "craftingfarmplus",
+            "position" : [-30, 30],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingfarm"],
+                    "invert" : false
+                }
+            ]
+        },
+        "craftingfurnace" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/craftingfurnace.json",
+            "name" : "craftingfurnace",
+            "position" : [36, 36],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingfurnace"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Turn Up The Heat : ^orange;Furnace^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Turn Up The Heat"
+        },
+        "craftingwheel" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/craftingwheel.json",
+            "name" : "craftingwheel",
+            "position" : [-66, 36],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingwheel"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Spin The Wheel : ^orange;Spinning Wheel^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Spin The Wheel"
+        },
+        "craftingfurniture" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/craftingfurniture.json",
+            "name" : "craftingfurniture",
+            "position" : [-96, 36],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingfurniture"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Rustic Charm : ^orange;Wooden Workbench^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Rustic Charm"
+        },
+
+        "inventorsTable2" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/inventorsTable2.json",
+            "name" : "inventorsTable2",
+            "position" : [0, 66],
+
+            "requires" : [],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Engineered Rise : ^orange;Engineer's Station^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Engineered Rise"
+        },
+        "fossilstation" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/fossilstation.json",
+            "name" : "fossilstation",
+            "position" : [-36, 66],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["fossilstation"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Digging The Past : ^orange;Fossil Station^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Digging The Past"
+        },
+        "refinery" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/refinery.json",
+            "name" : "refinery",
+            "position" : [-66, 66],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["refinery"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Cashing Out : ^orange;Refinery^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Cashing Out"
+        },
+        "craftingmedical" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/craftingmedical.json",
+            "name" : "craftingmedical",
+            "position" : [-96, 66],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["craftingmedical"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Medic! : ^orange;Apothecary^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Medic!"
+        },
+
+        "inventorsTable3" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/object/inventorsTable3.json",
+            "name" : "inventorsTable3",
+            "position" : [0, 96],
+
+            "requires" : [],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Architect of the Future : ^orange;Architect's Station^reset;"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Architect of the Future"
+        }
+    }
+}
