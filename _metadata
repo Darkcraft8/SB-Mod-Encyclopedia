@@ -9,6 +9,6 @@
   "require" : ["d8_sharedFiles"],
   "steamContentId" : "3410583838",
   "tags" : "Miscellaneous|In-Game Tools",
-  "version" : "V1.0.4.5 - Re-Written",
+  "version" : "V1.0.4.5 - Re-Written | Dev - 1.0.5",
   "scripts": {"postLoad": ["/D8Encyclopedia/Mod/categoryFetcher.lua"]}
 }
