@@ -1,0 +1,17 @@
+{
+    "priority" : 1,
+    "name" : "metalurgy",
+    "title" : "^shadow;Metalurgy^reset;",
+    "subTitle" : "^shadow;Usage of Metal^reset;",
+    "icon" : "/interface/crafting/tabicon_bars.png",
+
+    "requires" : [],
+
+    "unloadEvent" : [
+    ],
+    "loadEvent" : [
+    ],
+
+    "background" : {},
+    "btn" : {}
+}

@@ -92,6 +92,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
     clickEventType = clickEventType or {}
     renderType = renderType or {} -- handle the rendering of the different background element type... why din't i implemented this earlier ?
     updateFunc = updateFunc or {}
+    sizeOffset = nil -- used to move the explorable area of a category
     function init()
         local eS = root.assetJson("/D8Encyclopedia/Pane/new/extraScript.json")
         lang = root.assetJson("/D8Encyclopedia/Pane/new/lang.json")
@@ -176,8 +177,6 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
         local relativeCursorPos = getRelativeCursorPos()
         logString["cursorPosition"] = lang.camRelativePos .. sb.printJson({util.round(relativeCursorPos[1]), util.round(relativeCursorPos[2])})
         
-        if canvasStorage.debug then displayLog() end
-
         if subScript then if subScript["update"] then pcall(subScript["update"], dt) end else subScript = {} end
 
         storage.mousePosition = {0, 0}
@@ -189,6 +188,60 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
         else
             requirementCheckTimer = requirementCheckTimer - dt
         end
+
+        if storage.curCategory then
+            local effsize = copy(storage.curCategory.size)
+            if not effsize then 
+                effsize = {2^16, 2^16}
+            end
+            if effsize then
+                local canvasSize = canvas:size()
+                local canvasCenter = canvas:anchor("center")
+                logString["canvasSize"] = "canvasSize : " .. sb.printJson(canvasSize)
+                logString["canvasCenter"] = "canvasCenter : " .. sb.printJson(canvasCenter)
+                if #effsize == 2 then
+                    effsize = {
+                        -math.abs(effsize[1]),
+                        -math.abs(effsize[2]),
+                         math.abs(effsize[1]),
+                         math.abs(effsize[2])
+                    }
+                end
+                
+                if sizeOffset then
+                    effsize[1] = effsize[1] + sizeOffset[1]
+                    effsize[2] = effsize[2] + sizeOffset[2]
+                    effsize[3] = effsize[3] + sizeOffset[1]
+                    effsize[4] = effsize[4] + sizeOffset[2]
+                end
+
+                local min, max = vec2.mul({effsize[1], effsize[2]}, 0.5), vec2.mul({effsize[3], effsize[4]}, 0.5)
+                local minDist, maxDist = {min[1] - (-canvasCenter[1]), min[2] - (-canvasCenter[2])}, {max[1] - canvasCenter[1], max[2] - canvasCenter[2]}
+
+                if minDist[1] == -canvasCenter[1] then minDist[1] = 0 end
+                if minDist[2] == -canvasCenter[2] then minDist[2] = 0 end
+                if maxDist[1] == canvasCenter[1] then maxDist[1] = 0 end
+                if maxDist[2] == canvasCenter[2] then maxDist[2] = 0 end
+                
+
+                min, max = vec2.add(min, minDist), vec2.add(max, maxDist)
+
+                if storage.curCategory.size then
+                    logString["mincameraposition"] = "min camera position : "..sb.printJson(min)
+                    logString["maxcameraposition"] = "max camera position : "..sb.printJson(max)
+                end
+
+                if effsize[1] >= -canvasCenter[1] and effsize[2] >= -canvasCenter[2] and effsize[3] <= canvasCenter[1] and effsize[4] <= canvasCenter[1] then
+                    canvasStorage.nextCamPos = sizeOffset or {0,0}
+                else
+                    canvasStorage.nextCamPos = {
+                        util.clamp(canvasStorage.nextCamPos[1], -max[1], -min[1]),
+                        util.clamp(canvasStorage.nextCamPos[2], -max[2], -min[2])
+                    }
+                end
+            end
+        end
+        if canvasStorage.debug then displayLog() end
     end
 
     function updateCategoryPos(dt, show, uptime)
@@ -217,7 +270,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
     end
 
     function displayLog()
-        logString["camPos"] = "camPos : " .. sb.printJson({util.round(canvasStorage.camPos[1]), util.round(canvasStorage.camPos[2])}) .. ", nextCamPos : " .. sb.printJson(canvasStorage.nextCamPos)
+        logString["camPos"] = "camPos : " .. sb.printJson({util.round(canvasStorage.camPos[1] * -1), util.round(canvasStorage.camPos[2] * -1)}) .. ", nextCamPos : " .. sb.printJson(vec2.mul(canvasStorage.nextCamPos, -1))
         logString["zoom"] =  lang.nextZoom .. sb.printJson(canvasStorage.nextCamZoom or 1) ..", " .. lang.zoom .. sb.printJson((canvasStorage.camZoom or 1))
         local logList = {}
         
@@ -733,6 +786,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
 
     function setCategory(index)
         local loaded = false
+        sizeOffset = nil
         if storage.curCategory then
             for _, event in pairs(storage.curCategory.unloadEvent or {}) do 
                 local callback = findCallback(event.call)
@@ -842,6 +896,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
     end
 
     function loadCategory(categoryListPath, categoryName)
+        consLogString = {}
         storage.category = {}
         local categoryList = categoryListPath or config.getParameter("categoryList", "/D8Encyclopedia/Category/list.json")
         if type(categoryList) == "string" then categoryList = root.assetJson(categoryList) end
@@ -866,6 +921,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
 
         if storage.category[1] then
             setCategory(categoryName or 1)
+            if categoryListPath then updateCategoryPos(script.updateDt(), true, 1.5) end
         end
     end
     
