@@ -2,6 +2,7 @@
   "name" : "d8Encylopedia_starbound_progression",
   "title" : "^orange;Starbound ^white;progression^#fff0,set;",
   "type" : "generic",
+  "note" : "mostly for testing",
 
   "collectables" : {
     "inventorstableT1" : {

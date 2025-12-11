@@ -1,0 +1,48 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/items/active/weapons/bow/bow/bowicon.png",
+        "hover" : "/items/active/weapons/bow/bow/bowicon.png?brightness=25?saturation=-25",
+        "pressed" : "/items/active/weapons/bow/bow/bowicon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "Bow"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarmicon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/items/active/weapons/bow/bow/bowfull.png:1"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Crafted Through: Foraging Station"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "Bows allow to obtain more loot from monsters."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : "/recipes/farmtable1/hunting/bow.recipe"
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "Bow"
+}

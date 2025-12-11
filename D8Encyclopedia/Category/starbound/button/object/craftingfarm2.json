@@ -1,0 +1,53 @@
+{
+    "parallax" : 0,
+    "image" : {
+        "base" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarm2icon.png",
+        "hover" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarm2icon.png?brightness=25?saturation=-25",
+        "pressed" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarm2icon.png?brightness=-25?saturation=-25"
+    },
+    "frame" : 1,
+    "position" : [0, 0],
+    "positionLocked" : false,
+    "anchor" : "center",
+    "centered" : true,
+    "callback" : "buttonEvent",
+                    
+    "clickEvent" : [
+        {
+            "call" : "clickEventType.prefab",
+            "args" : [
+                "craftable",
+                {
+                    "gui" : {
+                        "labelTitle" : {
+                            "value" : "^orange;Apothecary^white;"
+                        },
+                        "labelLayout" : {
+                            "children" : {
+                                "craftingStationIcon" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarmicon.png"
+                                },
+                                "objectImage" : {
+                                    "file" : "/objects/crafting/upgradeablecraftingobjects/craftingfarm/craftingfarm2.png:default.default"
+                                },
+                                "objectLabel" : {
+                                    "value" : "Upgrade: ^orange;Foraging Table^reset;"
+                                },
+                                "labelScrollArea"  : { "children": { "labelText" : {
+                                    "value" : "The Agricultural Station in upgrade that give access to more recipes."
+                                } } } 
+                            } 
+                        }
+                    },
+                    "recipe" : { "input" : [
+                        { "item" : "durasteelbar", "count" : 6 },
+                        { "item" : "siliconboard", "count" : 3 },
+                        { "item" : "wire", "count" : 5 }, 
+                        { "item" : "battery", "count" : 1 }
+                    ]}
+                }
+            ]
+        }
+    ],
+    "tooltipCfg" : "^orange;Agricultural Station^white;"
+}

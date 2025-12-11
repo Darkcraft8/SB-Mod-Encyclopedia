@@ -5,7 +5,7 @@
     "subTitle" : "Lua Powered Documentation",
     "icon" : "/D8Encyclopedia/Pane/new/icon.png",
     "zoom" : 0,
-    "size" : [1168, 592],
+    "size" : [595, 595],
         
     "unloadEvent" : [
         {

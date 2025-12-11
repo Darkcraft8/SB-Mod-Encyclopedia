@@ -46,6 +46,7 @@
             "position" : [0, 0],
             "positionLocked" : false,
             "anchor" : "center",
+            "visible" : false,
             "centered" : true
         },
         "textInfo1" : {
@@ -70,7 +71,7 @@
             "zLevel" : 2,
             "requires" : [],
 
-            "string" : "Coming next update,\n^red;Teaser Screenshot, Suspect To Changes.^reset;",
+            "string" : "Coming next update",
             "horizontalTextAnchor" : "right",
             "verticalTextAnchor" : "bottom",
             "color" : [255, 150, 50, 255],
