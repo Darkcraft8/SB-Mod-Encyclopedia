@@ -1,5 +1,5 @@
 # Darkcraft8 Starbound Mod License
-## This License Doesn't Take Precedent Over Chucklefish Mod Terms [Chucklefish Mod Terms][def2]
+## This License Doesn't Take Precedent Over Chucklefish Mod Terms [Chucklefish Mod Terms Page][def2]
 
 ### In the context of this license
 - The original developer refer to [Darkcraft8][def].
@@ -15,3 +15,4 @@
 - Use any content created directly or indirectly using the mod
 
 [def]: https://github.com/Darkcraft8
+[def2]: <https://community.playstarbound.com/help/mod-terms/> "Click to access Chucklefish Mod Terms"

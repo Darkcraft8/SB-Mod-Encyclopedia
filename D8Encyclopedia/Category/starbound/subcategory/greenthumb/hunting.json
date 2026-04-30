@@ -4,14 +4,140 @@
     "title" : "^shadow;Hunting^reset;",
     "subTitle" : "^shadow;Hunting Nom Materials^reset;",
     "icon" : "/interface/crafting/tabicon_hunting.png",
+    "size" : [-148, -148, 148, 148],
+    "debug" : false,
 
     "requires" : [],
 
     "unloadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.resetMusic",
+            "args" : [1]
+        }
     ],
     "loadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.setMusic",
+            "args" : [["/music/drosera.ogg"], 1]
+        }
     ],
 
-    "background" : {},
-    "btn" : {}
+    "background" : {
+        "bg_tiled" : {
+            "parallax" : 0,
+            "zLevel" : -100,
+            "image" : "/D8Encyclopedia/Category/starbound/texture/tiled/leather.png",
+            "frame" : 1,
+            "animationCycle" : 1,
+            "scale" : 1,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "visible" : true,
+            "centered" : true,
+            "tiled" : true
+        },
+        "bg_statue" : {
+            "parallax" : 0,
+            "image" : "/objects/mission/floranchampionstatue/huntingchampionstatue.png:default.<frameIndex>?brightness=-25?saturation=12",
+            "frame" : 4,
+            "animationCycle" : 0.5,
+            "scale" : 3,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "visible" : true,
+            "centered" : true
+        },
+        
+        "bg_cornerA" : {
+            "parallax" : 0,
+            "image" : "/assetmissing.png?crop;0;0;1;1?setcolor;fff?replace;fff0=ffff?scalenearest=3",
+            "frame" : 1,
+            "animationCycle" : 0.5,
+            "scale" : 1,
+            "position" : [-148, 148],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "visible" : true,
+            "centered" : true
+        },
+        
+        "bg_cornerB" : {
+            "parallax" : 0,
+            "image" : "/assetmissing.png?crop;0;0;1;1?setcolor;fff?replace;fff0=ffff?scalenearest=3",
+            "frame" : 1,
+            "animationCycle" : 0.5,
+            "scale" : 1,
+            "position" : [148, 148],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "visible" : true,
+            "centered" : true
+        },
+        
+        "bg_cornerC" : {
+            "parallax" : 0,
+            "image" : "/assetmissing.png?crop;0;0;1;1?setcolor;fff?replace;fff0=ffff?scalenearest=3",
+            "frame" : 1,
+            "animationCycle" : 0.5,
+            "scale" : 1,
+            "position" : [148, -148],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "visible" : true,
+            "centered" : true
+        },
+        
+        "bg_cornerD" : {
+            "parallax" : 0,
+            "image" : "/assetmissing.png?crop;0;0;1;1?setcolor;fff?replace;fff0=ffff?scalenearest=3",
+            "frame" : 1,
+            "animationCycle" : 0.5,
+            "scale" : 1,
+            "position" : [-148, -148],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "visible" : true,
+            "centered" : true
+        }
+        
+    },
+    "btn" : {
+        "bow" : {
+            "path" : "/D8Encyclopedia/Category/starbound/button/item/bow.json",
+            "name" : "bow",
+            "position" : [-52, -8],
+
+            "requires" : [
+                {
+                    "type" : "function",
+                    "call" : "player.blueprintKnown",
+                    "args" : ["bow"],
+                    "invert" : false
+                }
+            ],
+            "hideWhenDisabled" : false,
+            
+            "clickEvent" : [
+                {
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "craftable",
+                        {
+                            "gui" : {
+                                "labelTitle" : {
+                                    "value" : "Hunting Beasts : Bow"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
+            "tooltipCfg" : "Hunting Beasts"
+        }
+    }
 }

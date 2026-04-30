@@ -3,7 +3,9 @@
 --]]
 renderType = renderType or {}
 renderType.image = function(cfg, curFrame, background, backgroundIndex)
+    if background.visible == false then return end
     local image = background.image or "/assetmissing.png"
+    local effFrame = math.floor(util.round(curFrame * (background.frameCycle or background.animationCycle or 1)))
     image = string.gsub(image, "<frame>", 1 + curFrame % (background.frame or 1))
     image = string.gsub(image, "<frameIndex>", curFrame % (background.frame or 1))
     if background.frame then
@@ -37,6 +39,7 @@ renderType.image = function(cfg, curFrame, background, backgroundIndex)
 end
 
 renderType.line = function(cfg, curFrame, background, backgroundIndex)
+    if background.visible == false then return end
     local startPos, endPos = background.startPos, background.endPos
     if startPos and endPos then
         local lineWidth = copy(background.lineWidth or 1)
@@ -137,6 +140,7 @@ renderType.line = function(cfg, curFrame, background, backgroundIndex)
 end
 
 renderType.text = function(cfg, curFrame, background, backgroundIndex)
+    if background.visible == false then return end
     local index = "background_" .. backgroundIndex
     local parallax = copy(background.parallax or 1)
     local offset = background.position

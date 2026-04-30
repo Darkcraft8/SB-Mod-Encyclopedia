@@ -92,6 +92,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
     clickEventType = clickEventType or {}
     renderType = renderType or {} -- handle the rendering of the different background element type... why din't i implemented this earlier ?
     updateFunc = updateFunc or {}
+    sizeOffset = nil -- used to move the explorable area of a category
     function init()
         local eS = root.assetJson("/D8Encyclopedia/Pane/new/extraScript.json")
         lang = root.assetJson("/D8Encyclopedia/Pane/new/lang.json")
@@ -176,8 +177,6 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
         local relativeCursorPos = getRelativeCursorPos()
         logString["cursorPosition"] = lang.camRelativePos .. sb.printJson({util.round(relativeCursorPos[1]), util.round(relativeCursorPos[2])})
         
-        if canvasStorage.debug then displayLog() end
-
         if subScript then if subScript["update"] then pcall(subScript["update"], dt) end else subScript = {} end
 
         storage.mousePosition = {0, 0}
@@ -189,6 +188,69 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
         else
             requirementCheckTimer = requirementCheckTimer - dt
         end
+
+        if storage.curCategory then
+            local effsize = copy(storage.curCategory.size)
+            if not effsize then 
+                effsize = {2^16, 2^16}
+            end
+            if effsize then
+                local canvasSize = canvas:size()
+                local canvasCenter = canvas:anchor("center")
+                logString["canvasSize"] = "canvasSize : " .. sb.printJson(canvasSize)
+                logString["canvasCenter"] = "canvasCenter : " .. sb.printJson(canvasCenter)
+                if #effsize == 2 then
+                    effsize = {
+                        -math.abs(effsize[1]),
+                        -math.abs(effsize[2]),
+                         math.abs(effsize[1]),
+                         math.abs(effsize[2])
+                    }
+                end
+                
+                if sizeOffset then
+                    logString["sizeOffset"] = "size offset : ".. sb.printJson(sizeOffset or {})
+                    effsize[1] = effsize[1] + sizeOffset[1]
+                    effsize[2] = effsize[2] + sizeOffset[2]
+                    effsize[3] = effsize[3] + sizeOffset[1]
+                    effsize[4] = effsize[4] + sizeOffset[2]
+                end
+
+                local min, max = vec2.mul({effsize[1], effsize[2]}, 0.5), vec2.mul({effsize[3], effsize[4]}, 0.5)
+                local minDist, maxDist = {min[1] - (-canvasCenter[1]), min[2] - (-canvasCenter[2])}, {max[1] - canvasCenter[1], max[2] - canvasCenter[2]}
+
+                if minDist[1] == -canvasCenter[1] then minDist[1] = 0 end
+                if minDist[2] == -canvasCenter[2] then minDist[2] = 0 end
+                if maxDist[1] == canvasCenter[1] then maxDist[1] = 0 end
+                if maxDist[2] == canvasCenter[2] then maxDist[2] = 0 end
+                
+
+                min, max = vec2.add(min, minDist), vec2.add(max, maxDist)
+
+                canvasStorage.nextCamPos = {
+                    util.clamp(canvasStorage.nextCamPos[1], -max[1], -min[1]),
+                    util.clamp(canvasStorage.nextCamPos[2], -max[2], -min[2])
+                }
+                local canvLeftSmaller, canvBottomSmaller, canvRightSmaller, canvTopSmaller = (effsize[1] >= -canvasCenter[1]), (effsize[2] >= -canvasCenter[2]), (effsize[3] <= canvasCenter[1]), (effsize[4] <= canvasCenter[1])
+                logString["canvaswindowsizebool"] = "canvas window size bool : " .. string.format("left %s, bottom %s, right %s, top %s", canvLeftSmaller, canvBottomSmaller, canvRightSmaller, canvTopSmaller)
+                if canvLeftSmaller and canvRightSmaller then
+                    canvasStorage.nextCamPos[1] = (sizeOffset or {})[1] or 0
+                    min[1] = 0
+                    max[1] = 0
+                end
+                if canvBottomSmaller and canvTopSmaller then
+                    canvasStorage.nextCamPos[2] = (sizeOffset or {})[2] or 0
+                    min[2] = 0
+                    max[2] = 0
+                end
+                
+                if storage.curCategory.size then
+                    logString["mincameraposition"] = "min camera position : "..sb.printJson(min)
+                    logString["maxcameraposition"] = "max camera position : "..sb.printJson(max)
+                end
+            end
+        end
+        if (canvasStorage.debug or (storage.curCategory or {}).debug) then displayLog() end
     end
 
     function updateCategoryPos(dt, show, uptime)
@@ -209,15 +271,21 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
     end
 
     function updateCanvasSize()
-        local pos, size = widget.getPosition("categoryLayout.category_background"), widget.getSize("categoryLayout")
-        local offset = vec2.add(pos, size)
-        offset[2] =  0
-        widget.setPosition("screenCanvas", vec2.add(canvasPos, offset))
-        widget.setSize("screenCanvas", vec2.sub(canvasSize, offset))
+        if widget.active("categoryLayout") then
+            local data = widget.getData("categoryLayout") or {}
+            local pos, size = widget.getPosition("categoryLayout.category_background"), vec2.add(widget.getSize("categoryLayout"), (data.scaleOffset or {0,0}))
+            local offset = vec2.add(pos, size)
+            offset[2] =  0
+            widget.setPosition("screenCanvas", vec2.add(canvasPos, offset))
+            widget.setSize("screenCanvas", vec2.sub(canvasSize, offset))
+        else
+            widget.setPosition("screenCanvas", canvasPos)
+            widget.setSize("screenCanvas", canvasSize)
+        end
     end
 
     function displayLog()
-        logString["camPos"] = "camPos : " .. sb.printJson({util.round(canvasStorage.camPos[1]), util.round(canvasStorage.camPos[2])}) .. ", nextCamPos : " .. sb.printJson(canvasStorage.nextCamPos)
+        logString["camPos"] = "camPos : " .. sb.printJson({util.round(canvasStorage.camPos[1] * -1), util.round(canvasStorage.camPos[2] * -1)}) .. ", nextCamPos : " .. sb.printJson(vec2.mul(canvasStorage.nextCamPos, -1))
         logString["zoom"] =  lang.nextZoom .. sb.printJson(canvasStorage.nextCamZoom or 1) ..", " .. lang.zoom .. sb.printJson((canvasStorage.camZoom or 1))
         local logList = {}
         
@@ -330,10 +398,11 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                     return _a > _b
                 end)
                 for backgroundIndex, background in pairs(backgroundImages) do
-                    if renderType[string.lower(background.type or "null") ] then
+                    if renderType[string.lower(background.type or "null")] then
                         renderType[string.lower(background.type or "null")](cfg, curFrame, copy(background), backgroundIndex)
                     elseif (not background.type) or string.lower(background.type) == "image" then
-                        local image = background.image or "/assetmissing.png"
+                        renderType["image"](cfg, curFrame, copy(background), backgroundIndex)
+                        --[[local image = background.image or "/assetmissing.png"
                         image = string.gsub(image, "<frame>", 1 + curFrame % (background.frame or 1))
                         image = string.gsub(image, "<frameIndex>", curFrame % (background.frame or 1))
                         local parallax = background.parallax or 1
@@ -360,133 +429,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                         elseif canvas:isVisible(image, offset, background.centered) then
                             if canvasStorage.debug_bgImage then logString[index] = string.format("%s, %s, %s, %s, %s", index, sb.printJson(roundVect(offset)), scale, sb.printJson(color), background.centered) end
                             canvas:drawImage(image, offset, scale, color, background.centered)
-                        end
-                    elseif string.lower(background.type) == "line" then
-                        local startPos, endPos = background.startPos, background.endPos
-                        if startPos and endPos then
-                            local lineWidth = copy(background.lineWidth or 1)
-                            local color = copy(background.color or {255,255,255})
-                            local parallax = copy(background.parallax or 1)
-                            if background.anchor then
-                                local anchor = canvas:anchor(background.anchor)
-                                startPos = vec2.add(startPos, anchor)
-                                endPos = vec2.add(endPos, anchor)
-                            end
-                            if not background.positionLocked then 
-                                startPos = canvas:translateFromCamera(startPos, canvasStorage.camZoom, parallax)
-                                endPos = canvas:translateFromCamera(endPos, canvasStorage.camZoom, parallax)
-                                lineWidth = math.max(0, lineWidth + (canvasStorage.camZoom * lineWidth))
-                            end
-                            
-                            local shouldDrawLine = true
-                            if background.encyclopedia then
-                                if background.encyclopedia.wave then -- Inspired by thaumcraft thaumoninomicon research trail
-                                    shouldDrawLine = false
-                                    local posOffsetStart, posOffsetEnd = vec2.sub(startPos, background.startPos), vec2.sub(endPos, background.endPos)
-                                    local absDist = vec2.mag(vec2.sub(background.startPos, background.endPos))
-                                    local segmentCount = background.encyclopedia.wave.segmentCount or math.ceil(12 * (absDist / 120))
-                                    local speed, range = (background.encyclopedia.wave.speed or (segmentCount * 0.5)), (background.encyclopedia.wave.range or (segmentCount * 0.15))
-                                    speed = speed / segmentCount
-                                    --range = range * (speed / segmentCount)
-                                    
-                                    for i = 1, segmentCount do
-                                        local uptime = 1 + (copy(uptime)) -- adding 1 to jump start the effect
-                                        local isLastSegment = (i == segmentCount)
-                                        local startPos, endPos = copy(background.startPos), copy(background.endPos)
-                                        local distance = vec2.sub(startPos, endPos)
-                                        local segColor = copy(color)
-                                        local startOffset = {0, ( math.sin((uptime + (i - 1)) * (speed)) )}
-                                        local wiggle = {0, ( math.sin((uptime + i) * (speed)) )}
-                                        local index = "line_" .. backgroundIndex .. "sine"
-                                        if canvasStorage.debug_bgLine then logString[index] = string.format(index .. ": " .. util.round(startOffset[2]) .. ": " .. util.round(wiggle[2])) end
-
-                                        startOffset[2] = startOffset[2] + (startOffset[2] / 2)
-                                        wiggle[2] = wiggle[2] + (wiggle[2] / 2)
-                                        -- range
-                                            startOffset[2] = startOffset[2] * range
-                                            wiggle[2] = wiggle[2] * range
-                                        --
-                                        local rotation = math.atan(distance[2] / distance[1])
-                                        wiggle = vec2.rotate(wiggle, rotation)
-                                        startOffset = vec2.rotate(startOffset, rotation)
-
-                                        startPos = vec2.sub(startPos, vec2.mul(vec2.div(distance, segmentCount), (i - 1)))
-                                        if (not isLastSegment) then
-                                            endPos = vec2.sub(startPos, vec2.div(distance, segmentCount))
-                                            endPos = vec2.add(endPos, wiggle)
-                                        elseif (not background.encyclopedia.wave.lockEnd) then
-                                            endPos = vec2.sub(startPos, vec2.div(distance, segmentCount))
-                                            endPos = vec2.add(endPos, vec2.mul(wiggle, 1 - (background.encyclopedia.wave.endStrength or 0)))
-                                        end
-                                        if i ~= 1 then startPos = vec2.add(startPos, startOffset) elseif not background.encyclopedia.wave.lockStart then
-                                            startPos = vec2.add(startPos, vec2.mul(startOffset, 1 - (background.encyclopedia.wave.startStrength or 0)))
-                                        end
-                                        local _startPos, _endPos = vec2.add(posOffsetStart, startPos), vec2.add(posOffsetEnd, endPos)
-                                        --local index = "line_" .. backgroundIndex .. "_seg_" .. i
-                                        --logString[index] = string.format("%s, %s, %s, %s, %s, %s", index, sb.printJson(roundVect(_startPos)), sb.printJson(roundVect(_endPos)), sb.printJson(color), lineWidth, background.positionLocked)
-                                        if background.encyclopedia.wave.endColor then
-                                            local progress = 1 + (i / segmentCount)
-                                            local endColor = copy(background.encyclopedia.wave.endColor)
-                                            if not color[4] then color[4] = 255 end
-                                            if not endColor[4] then endColor[4] = 255 end
-                                            segColor = {
-                                                color[1] + (endColor[1] - color[1]) * progress,
-                                                color[2] + (endColor[2] - color[2]) * progress,
-                                                color[3] + (endColor[3] - color[3]) * progress,
-                                                color[4] + (endColor[4] - color[4]) * progress
-                                            }
-                                        end
-                                        canvas:drawLine(_startPos, _endPos, segColor, lineWidth)
-                                        --[[
-                                        local textPositioning = {
-                                            position = vec2.add(_startPos, {0, -4}),--{0, canvas:size()[2] - 5},
-                                            horizontalAnchor = "left", -- left, mid, right
-                                            verticalAnchor = "top", -- top, mid, bottom
-                                            wrapWidth = nil -- wrap width in pixels or nil
-                                        }
-                                        if i == 1 then canvas:drawText(i.." : cos : "..math.sin(uptime), textPositioning, 7, {255, 161, 0}) end
-
-                                        local textPositioning = {
-                                            position = vec2.add(_startPos, {0, 0}),--{0, canvas:size()[2] - 5},
-                                            horizontalAnchor = "left", -- left, mid, right
-                                            verticalAnchor = "top", -- top, mid, bottom
-                                            wrapWidth = nil -- wrap width in pixels or nil
-                                        }
-                                        canvas:drawText(i.." : start at : "..sb.printJson(startPos), textPositioning, 7, {255, 161, 0})
-                                        local textPositioning = {
-                                            position = vec2.add(_endPos, {0, 4}),--{0, canvas:size()[2] - 5},
-                                            horizontalAnchor = "left", -- left, mid, right
-                                            verticalAnchor = "top", -- top, mid, bottom
-                                            wrapWidth = nil -- wrap width in pixels or nil
-                                        }
-                                        canvas:drawText(i.." : end at : "..sb.printJson(endPos), textPositioning, 7, {255, 161, 0})
-                                        ]]
-                                    end
-                                end
-                            end
-                            local index = "line_" .. backgroundIndex
-                            if canvasStorage.debug_bgLine then logString[index] = string.format("%s, %s, %s, %s, %s, %s", index, sb.printJson(roundVect(startPos)), sb.printJson(roundVect(endPos)), sb.printJson(color), lineWidth, background.positionLocked) end
-
-                            if shouldDrawLine then
-                                canvas:drawLine(startPos, endPos, color, lineWidth) 
-                                local textPositioning = {
-                                    position = vec2.add(startPos, {0, 0}),--{0, canvas:size()[2] - 5},
-                                    horizontalAnchor = "left", -- left, mid, right
-                                    verticalAnchor = "top", -- top, mid, bottom
-                                    wrapWidth = nil -- wrap width in pixels or nil
-                                }
-                                canvas:drawText("startPos : "..sb.printJson(background.startPos), textPositioning, 7, {255, 161, 0})
-                                local textPositioning = {
-                                    position = vec2.add(endPos, {0, 4}),--{0, canvas:size()[2] - 5},
-                                    horizontalAnchor = "left", -- left, mid, right
-                                    verticalAnchor = "top", -- top, mid, bottom
-                                    wrapWidth = nil -- wrap width in pixels or nil
-                                }
-                                canvas:drawText("endPos : "..sb.printJson(background.endPos), textPositioning, 7, {255, 161, 0})
-                                
-                            end
-                        end
-                
+                        end]]
                     end
                 end
             end
@@ -530,7 +473,19 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                 local btn = copy(btn)
                 local visible = function(btn) 
                     local image, pos, show
-                    image = btn.base or (btn.image or {}).base or "/assetmissing.png"
+                    local btn = copy(btn)
+                    local backImage = (btn.backImage or {}).base
+                    local baseImage = btn.base or (btn.image or {}).base
+                    if (baseImage and backImage) then
+                        if (root.imageSize(baseImage)[1] > root.imageSize(backImage)[1]) or (root.imageSize(baseImage)[2] > root.imageSize(backImage)[2]) then
+                            image = baseImage or "/assetmissing.png"
+                        else
+                            image = backImage or "/assetmissing.png"
+                        end
+                    else
+                        image = baseImage or "/assetmissing.png"
+                    end
+                    
                     image = string.gsub(image, "<frame>", 1 + curFrame % (btn.frame or 1))
                     image = string.gsub(image, "<frameIndex>", curFrame % (btn.frame or 1))
 
@@ -539,7 +494,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
 
                     show = canvas:isVisible(image, pos, btn.centered)
                     
-                    if canvasStorage.debug_btnState then 
+                    if canvasStorage.debug_btnState then
                         if show and (not btn.positionLocked) then
                             logString[btn.name] = lang.btnInBound .. btn.name .. " at " .. sb.printJson(roundVect(pos)) 
                         elseif (not show) and (not btn.positionLocked) then 
@@ -554,6 +509,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                 if visible(btn) then
                     local showResult = shouldShow(btn.requires or {})
                     local show = true
+                    local backImages = (btn.backImage or {})
                     btn.disabled = not showResult
 
                     if btn.hideWhenDisabled then
@@ -569,7 +525,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                         else
                             if btn.name then new.name = btn.name end
                         end
-
+                        if btn.backImage then new.backImage = btn.backImage end
                         if btn.image then
                             new.image = btn.image
                         else
@@ -589,15 +545,15 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                         if btn.detectArea then 
                             new.detectArea = btn.detectArea
                         else
-                            local imageSize = root.imageSize(btn.intBox or new.image.base)
+                            local imageSize = root.imageSize(btn.intBox or backImages.base or new.image.base)
                             if not btn.intBox then
                                 if btn.hover then
-                                    local iS = root.imageSize(btn.hover)
+                                    local iS = root.imageSize(backImages.hover or btn.hover)
                                     if imageSize[1] < iS[1] then imageSize[1] = iS[1] end
                                     if imageSize[2] < iS[2] then imageSize[2] = iS[2] end
                                 end
                                 if btn.press then
-                                    local iS = root.imageSize(btn.press)
+                                    local iS = root.imageSize(backImages.press or btn.press)
                                     if imageSize[1] < iS[1] then imageSize[1] = iS[1] end
                                     if imageSize[2] < iS[2] then imageSize[2] = iS[2] end
                                 end
@@ -717,6 +673,11 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                 table.insert(widgetList, "categoryLayout.category.list.".. id)
             end
         end
+        if ((#storage.category < 2) or config.getParameter("hideCategories", false)) and not config.getParameter("forceShowCategories", false) then
+            widget.setVisible("categoryLayout", false)
+        else
+            widget.setVisible("categoryLayout", true)
+        end
     end
 
     function catSelected()
@@ -733,6 +694,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
 
     function setCategory(index)
         local loaded = false
+        sizeOffset = nil
         if storage.curCategory then
             for _, event in pairs(storage.curCategory.unloadEvent or {}) do 
                 local callback = findCallback(event.call)
@@ -842,6 +804,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
     end
 
     function loadCategory(categoryListPath, categoryName)
+        consLogString = {}
         storage.category = {}
         local categoryList = categoryListPath or config.getParameter("categoryList", "/D8Encyclopedia/Category/list.json")
         if type(categoryList) == "string" then categoryList = root.assetJson(categoryList) end
@@ -866,6 +829,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
 
         if storage.category[1] then
             setCategory(categoryName or 1)
+            if categoryListPath then updateCategoryPos(script.updateDt(), true, 1.5) end
         end
     end
     

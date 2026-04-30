@@ -46,6 +46,7 @@
             "position" : [0, 0],
             "positionLocked" : false,
             "anchor" : "center",
+            "visible" : false,
             "centered" : true
         },
         "textInfo1" : {
@@ -53,16 +54,33 @@
             "zLevel" : 2,
             "requires" : [],
 
-            "string" : "This Is Where Information About The Main Game Would Be Located...\nSuggestion Are Welcome.",
+            "string" : "This Is Where Information About The Main Game Is Located...\nSuggestion Are Welcome.",
             "horizontalTextAnchor" : "left",
-            "verticalTextAnchor" : "mid",
+            "verticalTextAnchor" : "top",
             "color" : [255, 150, 50, 255],
             "scale" : 1,
 
             "parallax" : 0,
-            "position" : [2, -13],
-            "positionLocked" : false,
+            "position" : [2, -2],
+            "positionLocked" : true,
             "anchor" : "topLeft"
+            
+        },
+        "textInfo2" : {
+            "type" : "text",
+            "zLevel" : 2,
+            "requires" : [],
+
+            "string" : "The Starbound Category is mostly mean't as an exemple/showcase of the pane base capability.",
+            "horizontalTextAnchor" : "right",
+            "verticalTextAnchor" : "bottom",
+            "color" : [255, 150, 50, 255],
+            "scale" : 1,
+
+            "parallax" : 0,
+            "position" : [-2, 2],
+            "positionLocked" : true,
+            "anchor" : "bottomRight"
             
         },
 
@@ -422,7 +440,7 @@
                                         "labelScrollArea"  : {
                                             "children": {
                                                 "labelText" : {
-                                                    "value" : "Hello and welcome!\nStarbound is a sandbox game with light rpg and survival elements where you will be exploring a mulitude of planets for materials and loot."
+                                                    "value" : "Hello and welcome!\nStarbound is a sandbox game with light rpg and survival elements where you will be exploring a mulitude of planets for materials and resources."
                                                 }
                                             }
                                         }
@@ -457,30 +475,27 @@
             }],
             "callback" : "buttonEvent",
             "name" : "starbound_resources",
-
-            "clickEventType" : "prefab",
-            "args" : [
-                "popup",
+            
+            "clickEvent" : [
                 {
-                    "gui" : {
-                        "labelTitle" : {
-                            "value" : "THE DIFFERENT PLAYER RESOURCES"
-                        },
-                        "labelLayout" : {
-                            "children" : {
-                                "labelScrollArea"  : {
-                                    "children": {
-                                        "labelText" : {
-                                            "value" : "The Player Character has 10 resources kind in vanilla, here some of the most important one.\n\n^red;Health^reset; :\nHas you can guess when it get to 0 or under you character will die and be teleported either on your ship or at a respawn point in the world if it has one.\n\n^green;Energy^reset; :\nIt used for some weapon ability and for your movement tech,\nwhen depleted it wont start regenerating for a moment,\nit take around 1.75 second to fillup from zero.\n\n^orange;Food^reset; :\nIt the amount of satiety that you character has,\nwhen it reach 0.15% or under the player will be affected with the 'hungry' debuff unless it at 0% where the hungry debuff will be replaced with the 'starving' debuff,\nit disabled in casual mode.\n\n^cyan;Breath^reset; :\nIt the amount of oxygen you have,\nwhen your head is stuck in solid terrain, in liquid or inside a airless environement, it will start to deplete and will regenerate when in open air.\nwhen it reach zero you start taking damage."
-                                        }
-                                    }
-                                }
+                    "call" : "clickEventType.prefab",
+                    "args" : [
+                        "popup",
+                        {
+                            "gui" : {
+                                "labelTitle" : { "value" : "THE DIFFERENT PLAYER RESOURCES" },
+                                "labelLayout" : {
+                                    "children" : {
+                                        "labelScrollArea"  : {
+                                            "children": {
+                                                "labelText" : {
+                                                    "value" : "The Player Character has 10 resources kind in vanilla, here some of the most important one.\n\n^red;Health^reset; :\nHas you can guess when it get to 0 or under your character will die and be teleported either on your ship or at a respawn point in the world if it has one, with the exception of hardcore mode where it will be unplayable.\n\n^green;Energy^reset; :\nIt used for some weapon ability and for your movement tech,\nwhen depleted it wont start regenerating for a moment,\nit take around 1.75 second to fill up from zero.\n\n^orange;Food^reset; :\nThe amount of satiety of your character.\nWhen it reach 0.15% or under the player will be affected with the 'hungry' debuff unless it at 0% where the hungry debuff will be replaced with the 'starving' debuff,\nit's disabled in casual mode.\n\n^cyan;Breath^reset; :\nThe amount of time you have before suffocating.\nwhen your head is inside a airless environement (inside a liquid or the terrain), it will start to deplete and will regenerate when in open air.\nwhen it reach zero you will start taking damage."
+                                }   }   }    }    }
                             }
                         }
-                    }
+                    ]
                 }
             ],
-
             "tooltipCfg" : "The Different Player Resources\n ^shadow,cyan;[Left Click For More Information]^reset;"
         },
 

@@ -16,3 +16,5 @@
             "range" : 3 // how far does it wave (optional)
         }
     }
+
+### Image

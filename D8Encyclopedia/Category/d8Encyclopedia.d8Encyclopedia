@@ -5,6 +5,7 @@
     "subTitle" : "Lua Powered Documentation",
     "icon" : "/D8Encyclopedia/Pane/new/icon.png",
     "zoom" : 0,
+    "size" : [595, 595],
         
     "unloadEvent" : [
         {
@@ -39,48 +40,13 @@
             "anchor" : "center",
             "tiled" : true
         },
-        "galaxy_hologram" : {
-            "parallax" : 0,
-            "image" : "/objects/ancient/hologramgalaxy/hologramgalaxy.png:default.<frameIndex>?scalenearest=2",
-            "frame" : 2,
-            "position" : [0, 11],
-            "positionLocked" : false,
-            "anchor" : "center",
-            "centered" : true
-        },
-        "u2m_line" : {
-            "type" : "line",
-            "zLevel" : 1,
-            "requires" : [{
-                "type" : "function",
-                "call" : "player.isAdmin",
-                "args" : [],
-                "invert" : false
-            }],
-
-            "startPos" : [0, 0],
-            "endPos" : [90, 0],
-            "color" : [255, 255, 255, 255],
-            "lineWidth" : 3,
-
-            "parallax" : 0,
-            "positionLocked" : false,
-            "anchor" : "center",
-            "encyclopedia" : {
-                "wave" : {
-                    "startStrenght" : 1,
-                    "endStrenght" : 1,
-                    "endColor" : [255, 255, 255, 150]
-                }
-            }
-        },
 
         "txtTutorial1" : {
             "type" : "text",
             "zLevel" : 2,
             "requires" : [],
 
-            "string" : "^shadow;Click Here For Basic Usage ->",
+            "string" : "^shadow;This is a button->",
             "horizontalTextAnchor" : "mid",
             "verticalTextAnchor" : "mid",
             "color" : [200, 200, 200, 255],
@@ -112,29 +78,6 @@
         },
 
         "txtTutorial3" : {
-            "type" : "text",
-            "zLevel" : 2,
-            "requires" : [{
-                "type" : "function",
-                "call" : "player.isAdmin",
-                "args" : [],
-                "invert" : false
-            }],
-
-            "string" : "^shadow;<- Click Here For Basic Modder Usage",
-            "horizontalTextAnchor" : "mid",
-            "verticalTextAnchor" : "mid",
-            "color" : [200, 200, 200, 255],
-            "scale" : 1,
-
-            "parallax" : 0,
-            "position" : [165, 0],
-            "positionLocked" : false,
-            "anchor" : "center"
-            
-        },
-
-        "txtTutorial4" : {
             "type" : "text",
             "zLevel" : 2,
             "requires" : [],
@@ -228,51 +171,6 @@
             "args" : ["basicUsageInfo"],
 
             "tooltipCfg" : "Basics Usage : Player\nHow To Use The Encyclopedia ^shadow,cyan;[Left Click To Open]^reset;"
-        },
-        "basicUsageModder" : {
-            "parallax" : 0,
-            "image" : {
-                "base" : "/D8Encyclopedia/Pane/new/questionBtn.png",
-                "hover" : "/D8Encyclopedia/Pane/new/questionBtn.png?brightness=25?saturation=-25",
-                "pressed" : "/D8Encyclopedia/Pane/new/questionBtn.png?brightness=-25?saturation=-25"
-            },
-            "frame" : 1,
-            "position" : [90, 0],
-            "positionLocked" : false,
-            "anchor" : "center",
-            "centered" : true,
-
-            "callback" : "buttonEvent",
-            "name" : "basicUsageModder",
-            
-            "requires" : [{
-                "type" : "function",
-                "call" : "player.isAdmin",
-                "args" : [],
-                "invert" : false
-            }],
-            "hideWhenDisabled" : true,
-
-            "clickEventType" : "prefab",
-            "args" : [
-                "popup",
-                {
-                    "gui" : {
-                     "labelTitle" : {
-                      "value" : "Basics Usage : Modder"
-                     },
-                     "labelLayout" : {
-                      "children" : {
-                       "labelScrollArea"  : {
-                        "children": {
-                         "labelText" : {
-                          "value" : "- The \"background\" parameter contain image/sprite to be rendered in the background,\nthey can be tiled or not and have a few parameter that designate the way they appear\n- The \"btn\" contain all the canvas button \n- The categories list file is designated by the \"categoryList\""
-                     } } } } }
-                    }
-                }
-            ],
-
-            "tooltipCfg" : "Basics Usage : Modder\nHow To Use The Encyclopedia ^shadow,cyan;[Left Click To Open]^reset;"
         },
 
         "updateLog" : {
