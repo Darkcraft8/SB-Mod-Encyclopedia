@@ -5,19 +5,43 @@
     "subTitle" : "^shadow;Hunting Nom Materials^reset;",
     "icon" : "/interface/crafting/tabicon_hunting.png",
     "size" : [-148, -148, 148, 148],
-    "debug" : true,
+    "debug" : false,
 
     "requires" : [],
 
     "unloadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.resetMusic",
+            "args" : [1]
+        }
     ],
     "loadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.setMusic",
+            "args" : [["/music/drosera.ogg"], 1]
+        }
     ],
 
     "background" : {
+        "bg_tiled" : {
+            "parallax" : 0,
+            "zLevel" : -100,
+            "image" : "/D8Encyclopedia/Category/starbound/texture/tiled/leather.png",
+            "frame" : 1,
+            "animationCycle" : 1,
+            "scale" : 1,
+            "position" : [0, 0],
+            "positionLocked" : false,
+            "anchor" : "center",
+            "visible" : true,
+            "centered" : true,
+            "tiled" : true
+        },
         "bg_statue" : {
             "parallax" : 0,
-            "image" : "/objects/mission/floranchampionstatue/huntingchampionstatue.png:default.<frameIndex>?brightness=-50?saturation=25",
+            "image" : "/objects/mission/floranchampionstatue/huntingchampionstatue.png:default.<frameIndex>?brightness=-25?saturation=12",
             "frame" : 4,
             "animationCycle" : 0.5,
             "scale" : 3,

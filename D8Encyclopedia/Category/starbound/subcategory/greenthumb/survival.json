@@ -2,14 +2,24 @@
     "priority" : 0,
     "name" : "survival",
     "title" : "^shadow;Survival^reset;",
-    "subTitle" : "^shadow;Trying to not die challenge^reset;",
+    "subTitle" : "^shadow;Try to not die challenge^reset;",
     "icon" : "/interface/crafting/tabicon_survival.png",
 
     "requires" : [],
 
     "unloadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.resetMusic",
+            "args" : [1]
+        }
     ],
     "loadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.setMusic",
+            "args" : [["/music/casiopeia.ogg"], 1]
+        }
     ],
 
     "background" : {},

@@ -34,7 +34,7 @@
                                     "value" : "Crafted Through: Foraging Station"
                                 },
                                 "labelScrollArea"  : { "children": { "labelText" : {
-                                    "value" : "Bows allow to obtain more loot from monsters."
+                                    "value" : "Bows allow to obtain more loot from monsters such has leather and meat."
                                 } } } 
                             } 
                         }

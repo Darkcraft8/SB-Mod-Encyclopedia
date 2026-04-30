@@ -8,8 +8,18 @@
     "requires" : [],
 
     "unloadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.resetMusic",
+            "args" : [1]
+        }
     ],
     "loadEvent" : [
+        {
+            "type" : "function",
+            "call" : "clickEventType.setMusic",
+            "args" : [["/music/home-concept-loop.ogg"], 1]
+        }
     ],
 
     "background" : {},

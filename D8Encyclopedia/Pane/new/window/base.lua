@@ -41,10 +41,14 @@ prepareItemList = function(items, matchInputParameters, recipeTooltip)
             if not added then
                 table.insert(items, {
                     name = currency,
-                    count = amount
+                    count = amount,
+                    priority = 1
                 })
             end
         end
+        table.sort(items, function(a, b)
+            return (a.priority or 0) > (b.priority or 0)
+        end)
     end
 
     for index, descriptor in pairs(items or {}) do

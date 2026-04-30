@@ -271,11 +271,17 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
     end
 
     function updateCanvasSize()
-        local pos, size = widget.getPosition("categoryLayout.category_background"), widget.getSize("categoryLayout")
-        local offset = vec2.add(pos, size)
-        offset[2] =  0
-        widget.setPosition("screenCanvas", vec2.add(canvasPos, offset))
-        widget.setSize("screenCanvas", vec2.sub(canvasSize, offset))
+        if widget.active("categoryLayout") then
+            local data = widget.getData("categoryLayout") or {}
+            local pos, size = widget.getPosition("categoryLayout.category_background"), vec2.add(widget.getSize("categoryLayout"), (data.scaleOffset or {0,0}))
+            local offset = vec2.add(pos, size)
+            offset[2] =  0
+            widget.setPosition("screenCanvas", vec2.add(canvasPos, offset))
+            widget.setSize("screenCanvas", vec2.sub(canvasSize, offset))
+        else
+            widget.setPosition("screenCanvas", canvasPos)
+            widget.setSize("screenCanvas", canvasSize)
+        end
     end
 
     function displayLog()
@@ -519,7 +525,7 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                         else
                             if btn.name then new.name = btn.name end
                         end
-
+                        if btn.backImage then new.backImage = btn.backImage end
                         if btn.image then
                             new.image = btn.image
                         else
@@ -666,6 +672,11 @@ require "/shared/darkcraft8/d8ToolTipUtil/tooltips.lua"
                 widget.setData("categoryLayout.category.list.".. id, data)
                 table.insert(widgetList, "categoryLayout.category.list.".. id)
             end
+        end
+        if ((#storage.category < 2) or config.getParameter("hideCategories", false)) and not config.getParameter("forceShowCategories", false) then
+            widget.setVisible("categoryLayout", false)
+        else
+            widget.setVisible("categoryLayout", true)
         end
     end
 
