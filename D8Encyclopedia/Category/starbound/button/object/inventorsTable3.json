@@ -39,12 +39,7 @@
                             } 
                         }
                     },
-                    "recipe" : { "input" : [
-                        { "item" : "durasteelbar", "count" : 6 },
-                        { "item" : "battery", "count" : 1 },
-                        { "item" : "siliconboard", "count" : 5 },
-                        { "item" : "wire", "count" : 10 }
-                    ]}
+                    "recipe" : "item:inventorstable:upgradeStages.2.interactData.upgradeMaterials"
                 }
             ]
         }

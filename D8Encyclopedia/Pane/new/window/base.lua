@@ -132,3 +132,39 @@ prepareItemList = function(items, matchInputParameters, recipeTooltip)
 
     return itemListChild
 end
+
+-- I really should put this in d8:shared instead of copy/pasting it
+function segmentPath(path)
+    local pathSegment = {}
+    if string.find(path, "[.:]") then
+      while string.find(path, "[.:]") do
+        local dotNumber = string.find(path, "[.:]")
+        if dotNumber then
+            local segment = string.sub(path, 1, dotNumber - 1)
+            if not string.find(segment, "[a-z]") then
+                segment = tonumber(segment)
+            end
+            table.insert(pathSegment, segment)
+            path = string.sub(path, dotNumber + 1, string.len(path))
+        end
+      end
+    end
+    table.insert(pathSegment, path)
+    return pathSegment
+end
+
+function pathUp(_table, _segmentedPath)
+    local currentResult = nil
+    for _, string in ipairs(_segmentedPath) do
+        if not currentResult then 
+            currentResult = _table[string]
+        else
+            currentResult = currentResult[string]
+        end
+    end
+    if currentResult ~= nil then
+        return currentResult
+    else
+        return defaultValue
+    end
+end

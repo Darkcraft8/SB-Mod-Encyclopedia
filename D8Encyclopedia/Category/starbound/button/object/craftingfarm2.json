@@ -39,12 +39,7 @@
                             } 
                         }
                     },
-                    "recipe" : { "input" : [
-                        { "item" : "durasteelbar", "count" : 6 },
-                        { "item" : "siliconboard", "count" : 3 },
-                        { "item" : "wire", "count" : 5 }, 
-                        { "item" : "battery", "count" : 1 }
-                    ]}
+                    "recipe" : "item:craftingfarm:upgradeStages.1.interactData.upgradeMaterials"
                 }
             ]
         }

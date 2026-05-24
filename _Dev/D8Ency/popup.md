@@ -1,7 +1,8 @@
 ### Popup that would be nice to add/create
 
-#### Boss/Monster/NPC Info : focus
- This would give some basic info about it loot table where it would spawn, defence and such... Something inspired by terraria bestiary and Tmodloader Boss List.
+#### Boss/Monster/NPC Info : post poned
+ This would give some basic info about it loot table where it would spawn, defence and such...<br>
+ Something inspired by terraria bestiary and Tmodloader Boss List.<br>
  - dropPools aren't kept in the parameters when not given through parameters
 
 #### Object Descriptor : Done
