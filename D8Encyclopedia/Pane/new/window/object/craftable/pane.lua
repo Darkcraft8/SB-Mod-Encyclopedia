@@ -1,8 +1,9 @@
 require "/D8Encyclopedia/Pane/new/window/base.lua"
-
+local _update = update
 local recipeStorage = false
 local recipeTimer = 0
 function update(dt)
+    _update(dt)
     if recipeTimer > 0 then 
         recipeTimer = recipeTimer - dt
     else

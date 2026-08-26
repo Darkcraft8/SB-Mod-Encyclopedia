@@ -34,7 +34,7 @@
                                     "value" : "Crafted Through: ^orange;Inventor's Table^reset;"
                                 },
                                 "labelScrollArea"  : { "children": { "labelText" : {
-                                    "value" : "The Wooden Workbench is used to craft furnitures to acomodate your living spaces."
+                                    "value" : "The Wooden Workbench is used to craft furnitures to acomodate your living spaces and tiles/platform to construct said spaces."
                                 } } } 
                             } 
                         }

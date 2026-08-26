@@ -61,5 +61,6 @@
     "scripts" : ["/D8Encyclopedia/Pane/new/window/base.lua"],
     "scriptWidgetCallbacks" : [
         "close"
-    ]
+    ],
+    "waitTextStr" : "^cyan,shadow;Press Okay To Skip The Animation^reset;\n"
 }

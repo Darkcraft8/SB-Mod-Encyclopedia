@@ -1,8 +1,89 @@
 require "/scripts/util.lua"
 require "/scripts/vec2.lua"
+require "/shared/darkcraft8/util/string.lua" --[[
+    segmentString(str)
+]]
+local textSpeedOverwrite
+local textSound
+update = function(dt)
+    if not doDescriptionFill then doDescriptionFill = config.getParameter("doDescriptionFill", true) end
+    if doDescriptionFill then
+        textFill(dt, "labelLayout.labelScrollArea.labelText", true, true)
+        textFill(dt, "labelTitle", false, false)
+    end
+end
 
 close = function()
+    local _close = true
+    for a, b in pairs(textFillStorage) do 
+        if a ~= template then
+            if b.finished == false then 
+                _close = false
+                textFillStorage[a].time = (#textFillStorage[a].str)
+                textFillStorage[a].finished = true
+            end
+        end
+    end
+    if not _close then return end
     pane.dismiss()
+end
+textFillStorage = {
+    template = {
+        widgetPath = "gui",
+        str = "Replace Me",
+        time = 1,
+        prevTime = 1,
+        extraDotNumber = 1
+    }
+}
+textFill = function(dt, widgetPath, showSkip, showDot)
+    if not textFillStorage[widgetPath] then 
+        textFillStorage[widgetPath] = copy(textFillStorage.template)
+        textFillStorage[widgetPath].widgetPath = widgetPath
+        textFillStorage[widgetPath].str = segmentString(widget.getText(widgetPath) or "")
+        widget.setText(widgetPath, "")
+        textFillStorage[widgetPath].textSpeedOverwrite = (widget.getData(widgetPath) or {}).textSpeedOverwrite or config.getParameter("textSpeedOverwrite")
+        textFillStorage[widgetPath].finished = false
+    end
+    
+    if not textSound then textSound = config.getParameter("textSound", "/assetmissing.wav") end
+    if not textFillStorage[widgetPath].str then
+        textFillStorage[widgetPath].str = segmentString(widget.getText(widgetPath) or "")
+    else
+        local speed = math.max((textFillStorage[widgetPath].textSpeedOverwrite or ((#textFillStorage[widgetPath].str) * 0.01) ), 20)
+        local str = ""
+        if textFillStorage[widgetPath].time < (#textFillStorage[widgetPath].str) then
+            textFillStorage[widgetPath].time = math.min(textFillStorage[widgetPath].time + (dt * speed), #textFillStorage[widgetPath].str)
+            if showSkip then str = config.getParameter("waitTextStr", "^red,shadow;Btn == Anim:Skip()^reset;\n") end
+        else
+            textFillStorage[widgetPath].finished = true
+        end
+        textFillStorage[widgetPath].extraDotNumber = (textFillStorage[widgetPath].extraDotNumber + (dt)) % 3
+        
+        for i = 1, math.floor(textFillStorage[widgetPath].time) do
+            str = str .. textFillStorage[widgetPath].str[i]
+        end
+        if (textFillStorage[widgetPath].time == (#textFillStorage[widgetPath].str)) then
+            textFillStorage[widgetPath].finished = true
+            if showDot then
+                str = str .. "\n"
+                for i2 = 1, 1 + math.floor(textFillStorage[widgetPath].extraDotNumber) do 
+                    str = str .. "."
+                end
+                if (textFillStorage[widgetPath].extraDotNumber - math.floor(textFillStorage[widgetPath].extraDotNumber)) <= 0.01 then
+                    pane.playSound(textSound, 0)
+                end
+            end
+        else
+            str = str .. string.format("-:^gray;|%s", (#textFillStorage[widgetPath].str) - math.floor(textFillStorage[widgetPath].time))
+        end
+        widget.setText(widgetPath, str)
+        if not (math.floor(textFillStorage[widgetPath].prevTime) == math.floor(textFillStorage[widgetPath].time)) then
+            pane.playSound(textSound, 0)
+        end
+        textFillStorage[widgetPath].prevTime = copy(textFillStorage[widgetPath].time)
+    end
+
 end
 
 prepareItemList = function(items, matchInputParameters, recipeTooltip)
@@ -168,3 +249,4 @@ function pathUp(_table, _segmentedPath)
         return defaultValue
     end
 end
+

@@ -34,7 +34,7 @@
                                     "value" : "Crafted Through: ^orange;Inventor's Table^reset;"
                                 },
                                 "labelScrollArea"  : { "children": { "labelText" : {
-                                    "value" : "The Furnace is used to refine raw materials into more usable shapes."
+                                    "value" : "The Furnace is used to refine raw materials into more usable components."
                                 } } } 
                             } 
                         }
